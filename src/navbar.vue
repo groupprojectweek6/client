@@ -12,7 +12,7 @@
     <ModalLogin :dialog="modalLoginShow" v-on:close-modal="onModal"
       v-on:set-islogin="setIsLoginParent"></ModalLogin>
     <ModalRegister :dialog="modalRegisterShow" v-on:close-modal="onModal"></ModalRegister>
-    <ModalMyProfile :dialog="modalMyProfile" v-on:close-modal="onModal"></ModalMyProfile>
+    <ModalMyProfile :dialog="modalMyProfile" v-on:close-modal="onModal" v-if="isLogin"></ModalMyProfile>
   </v-toolbar>
 </template>
 
