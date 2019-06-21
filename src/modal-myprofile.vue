@@ -29,9 +29,9 @@
               </v-flex>
               <v-flex xs12 offset-xs3>
                 <h3>Based on Google, your emotions are : </h3>
-                {{ userLoginData.emotion }}
+                <h1 v-for="emote in userLoginData.emotion">{{ emote}}</h1>
                 <h3>Based on Google, your Gender : </h3>
-                {{ userLoginData.gender }}
+                <h1 v-for="gend in userLoginData.gender">{{ gend }}</h1>
               </v-flex>
             </v-flex>
             <v-list>
