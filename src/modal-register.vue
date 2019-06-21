@@ -62,7 +62,7 @@
         fd.append("password",this.password)
         fd.append("image",this.selectedFile)
         console.log(fd)
-        axios.post('http://localhost:3001/register',fd)
+        axios.post('http://localhost:3000/register',fd)
         .then(({ data }) => {
             console.log(data)
             this.$emit('close-modal', 'register')

@@ -114,7 +114,9 @@
       }
     },
     created() {
-      this.getUserLoginProfile()
+      if (localStorage.token) {
+        this.getUserLoginProfile()
+      }
     }
   }
 </script>

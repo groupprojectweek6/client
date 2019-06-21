@@ -35,8 +35,10 @@ export default {
       })
         .then(({ data }) => {
           console.log('ini data newUsers', data)
-          let loginUserId = JSON.parse(localStorage.token).userId
-          data = data.filter((one) => one._id !== loginUserId)
+          if (localStorage.token) {
+            let loginUserId = JSON.parse(localStorage.token).userId
+            data = data.filter((one) => one._id !== loginUserId)
+          }
           this.newUsers = data
         })
         .catch((err) => {
