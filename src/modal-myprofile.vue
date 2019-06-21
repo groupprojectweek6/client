@@ -14,12 +14,16 @@
                     :size="256"
                     color="grey lighten-4"
                   >
-                  <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
+                    <img :src="(userLoginData.image) ? userLoginData.image : 'https://vuetifyjs.com/apple-touch-icon-180x180.png'" 
+                      alt='avatar'>
+                  </v-avatar>
                 </v-layout>
               </v-flex>
             </v-layout>
-            </v-avatar>
             <v-flex>
+              <v-flex xs12 offset-xs3>
+                <h3>Hi {{ userLoginData.full_name }} </h3>
+              </v-flex>
               <v-flex xs12 offset-xs3>
                 <h3>Your rank is {{ rank }}</h3>
               </v-flex>
@@ -64,15 +68,32 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: ['dialog'],
     data() {
       return {
         rank: 10,
-        totalLike: 100
+        totalLike: 100,
+        userLoginData: {}
       }
     },
     methods: {
+      getUserLoginProfile() {
+        axios({
+          method: 'GET',
+          headers: {
+            token: JSON.parse(localStorage.token).token
+          },
+          url: 'http://localhost:3000/myprofile'
+        })
+          .then(({ data }) => {
+            this.userLoginData = data
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
       closedModal() {
         this.$emit('close-modal', 'myprofile')
       },
@@ -86,5 +107,8 @@
 
       }
     },
+    created() {
+      this.getUserLoginProfile()
+    }
   }
 </script>

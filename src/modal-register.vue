@@ -36,6 +36,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     props: ['dialog'],
     data() {
@@ -56,7 +58,6 @@
       sendRegister() {
         axios({
           method: 'POST',
-          headers: { token: JSON.parse(localStorage.token).token},
           url: 'http://localhost:3000/register'
         })
           .then(({ data }) => {
