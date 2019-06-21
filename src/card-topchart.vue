@@ -1,6 +1,6 @@
 <template>
   <v-flex xs12>
-    <v-card>
+    <v-card color="pink lighten-4">
       <v-layout>
         <v-flex xs5>
           <v-img

@@ -21,10 +21,13 @@
             </v-avatar>
             <v-flex>
               <v-flex xs12 offset-xs3>
-                <h3>Your rank is 217</h3>
+                <h3>Your rank is {{ rank }}</h3>
               </v-flex>
               <v-flex xs12 offset-xs3>
-                <h3>With 20 Likes</h3>
+                <h3>With {{ totalLike }} Likes</h3>
+              </v-flex>
+              <v-flex xs12 offset-xs3>
+                <h3>Data Google Vision</h3>
               </v-flex>
             </v-flex>
             <v-list>
@@ -34,12 +37,12 @@
                 </v-list-tile-content>
                 <v-list-tile-action @click="">
                   <v-btn flat icon color="pink">
-                    <v-icon>favorite</v-icon>
+                    <v-icon>star</v-icon>
                   </v-btn>
                 </v-list-tile-action>
                 <v-list-tile-action>
                   <v-btn flat icon color="pink">
-                    <v-icon>favorite</v-icon>
+                    <v-icon>star</i></v-icon>
                   </v-btn>
                 </v-list-tile-action>
                 <v-list-tile-action>
@@ -63,6 +66,12 @@
 <script>
   export default {
     props: ['dialog'],
+    data() {
+      return {
+        rank: 10,
+        totalLike: 100
+      }
+    },
     methods: {
       closedModal() {
         this.$emit('close-modal', 'myprofile')

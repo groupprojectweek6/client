@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-content>
-      <Navbar></Navbar>
+      <Navbar :isLoginParent='isLogin' v-on:set-logout="setLoginState" 
+        v-on:setIsLoginParent="setLoginState"></Navbar>
       <v-layout row v-if="currentPage == 'content-home'">
         <NewUser></NewUser>
         <Topchart></Topchart>
@@ -23,13 +24,22 @@ export default {
   },
   data() {
     return {
+      isLogin: false,
       message: 'Hello world',
       currentPage: 'content-home'
     };
   },
   methods: {
+    setLoginState(val) {
+      this.isLogin = val
+    },
     changePage(val) {
       this.currentPage = val
+    }
+  },
+  created() {
+    if (localStorage.token) {
+      this.isLogin = true
     }
   }
 };

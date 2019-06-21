@@ -9,10 +9,10 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field label="Email*" required></v-text-field>
+                <v-text-field v-model="email" label="Email*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Password*" type="password" required></v-text-field>
+                <v-text-field v-model="password" label="Password*" type="password" required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -29,14 +29,34 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: ['dialog'],
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
     methods: {
       closedModal() {
         this.$emit('close-modal', 'login')
       },
       sendLogin() {
-        this.$emit('close-modal', 'login')
+        axios({
+          method: 'POST',
+          data: { email: this.email, password: this.password },
+          url: 'http://localhost:3000/login'
+        })
+          .then(({ data }) => {
+            console.log('berhasil login', data)
+            localStorage.setItem('token', JSON.stringify(data))
+            this.$emit('close-modal', 'login')
+            this.$emit('set-islogin', true)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       }
     },
   }
