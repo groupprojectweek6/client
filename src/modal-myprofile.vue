@@ -26,10 +26,7 @@
                 <h3>Hi {{ userLoginData.full_name }} </h3>
               </v-flex>
               <v-flex xs12 offset-xs3>
-                <h3>Your rank is {{ rank }}</h3>
-              </v-flex>
-              <v-flex xs12 offset-xs3>
-                <h3>With {{ totalLike }} Likes</h3>
+                <h3>With {{ userLoginData.totalLike }} Likes</h3>
               </v-flex>
               <v-flex xs12 offset-xs3>
                 <h3>Data Google Vision</h3>
@@ -74,8 +71,6 @@
     props: ['dialog'],
     data() {
       return {
-        rank: 10,
-        totalLike: 100,
         userLoginData: {}
       }
     },
@@ -89,7 +84,17 @@
           url: 'http://localhost:3000/myprofile'
         })
           .then(({ data }) => {
-            this.userLoginData = data
+            console.log('ini user login', data)
+            this.userLoginData = {
+              totalLike: data.count,
+              id: data._id,
+              full_name: data.dataUser[0].full_name,
+              email: data.dataUser[0].email,
+              gender: data.dataUser[0].gender,
+              emotion: data.dataUser[0].emotion,
+              image: data.dataUser[0].image
+            }
+            console.log('hasilnya', this.userLoginData)
           })
           .catch((err) => {
             console.log(err)
@@ -109,7 +114,9 @@
       }
     },
     created() {
-      this.getUserLoginProfile()
+      if (localStorage.token) {
+        this.getUserLoginProfile()
+      }
     }
   }
 </script>
