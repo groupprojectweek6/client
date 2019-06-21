@@ -3,8 +3,9 @@
     <v-card>
       <v-img
         height="100px"
-        :src="(oneUser.image) ? oneUser.image : 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'"
-      ></v-img>
+        :src="(oneUser.image) ? oneUser.image : 'https://semantic-ui.com/images/wireframe/image.png'"
+      >
+      </v-img>
       <v-card-title>{{ oneUser.full_name }}</v-card-title>
       <v-card-actions v-if="isLoginParent">
         <v-layout align-center justify-center>

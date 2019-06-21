@@ -4,7 +4,7 @@
       <v-layout>
         <v-flex xs5>
           <v-img
-            :src="(dataUser.image) ? dataUser.image : 'https://cdn.vuetifyjs.com/images/cards/foster.jpg'"
+            :src="(dataUser.image) ? dataUser.image : 'https://semantic-ui.com/images/wireframe/image.png'"
             height="125px"
             contain
           ></v-img>

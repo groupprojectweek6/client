@@ -16,7 +16,6 @@
                   >
                     <img :src="(userLoginData.image) ? userLoginData.image : 'https://vuetifyjs.com/apple-touch-icon-180x180.png'" 
                       alt='avatar'>
-                  <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
                   </v-avatar>
                 </v-layout>
               </v-flex>
@@ -29,7 +28,10 @@
                 <h3>With {{ userLoginData.totalLike }} Likes</h3>
               </v-flex>
               <v-flex xs12 offset-xs3>
-                <h3>Data Google Vision</h3>
+                <h3>Based on Google, your emotions are : </h3>
+                {{ userLoginData.emotion }}
+                <h3>Based on Google, your Gender : </h3>
+                {{ userLoginData.gender }}
               </v-flex>
             </v-flex>
             <v-list>
@@ -38,18 +40,9 @@
                   <v-list-tile-title><h3>Share on your social media!</h3></v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-btn flat icon color="pink">
-                    <v-icon>star</v-icon>
-                  </v-btn>
-                </v-list-tile-action>
-                <v-list-tile-action>
-                  <v-btn flat icon color="pink">
-                    <v-icon>star</v-icon>
-                  </v-btn>
-                </v-list-tile-action>
-                <v-list-tile-action>
-                  <v-btn flat icon color="pink">
-                    <v-icon>star</v-icon>
+                  <v-btn flat icon color="pink" :href="linkTweet" target='_blank'>
+                    Twitter
+                    <v-icon>fab fa-twitter</v-icon>
                   </v-btn>
                 </v-list-tile-action>
               </v-list-tile>
@@ -71,7 +64,17 @@
     props: ['dialog'],
     data() {
       return {
-        userLoginData: {}
+        userLoginData: {},
+      }
+    },
+    computed: {
+      linkTweet() {
+        let textTweet = `I'm ${this.userLoginData.gender} & I'm ${this.userLoginData.emotion}. Checkout this page! menawan.robbycp.com`
+        console.log('hasil texttweet', textTweet)
+        let encodedURI = encodeURIComponent(textTweet)
+        console.log('hasil texttweet', encodedURI)
+        let value = 'https://twitter.com/intent/tweet?hashtags=menawan&text=' + encodedURI
+        return value
       }
     },
     methods: {
@@ -106,17 +109,11 @@
       sendLogin() {
         this.$emit('close-modal', 'myprofile')
       },
-      linkTwitter() {
-
-      },
-      linkFacebook() {
-
-      }
     },
     created() {
       if (localStorage.token) {
         this.getUserLoginProfile()
       }
-    }
+    },
   }
 </script>
