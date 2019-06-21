@@ -4,8 +4,7 @@
       <v-img
         height="100px"
         :src="(oneUser.image) ? oneUser.image : 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'"
-      >
-      </v-img>
+      ></v-img>
       <v-card-title>{{ oneUser.full_name }}</v-card-title>
       <v-card-actions v-if="isLoginParent">
         <v-layout align-center justify-center>
@@ -22,44 +21,55 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  export default {
-    props: ['oneUser', 'index', 'isLoginParent'],
-    methods: {
-      checkVoting() {
-
-      },
-      sendLike(id) {
-        axios({
-          method: 'POST',
-          headers: {
-            token: JSON.parse(localStorage.token).token
-          },
-          url: `http://localhost:3000/voting/${id}`
+import Swal from "sweetalert2";
+import axios from "axios";
+export default {
+  props: ["oneUser", "index", "isLoginParent"],
+  methods: {
+    checkVoting() {},
+    sendLike(id) {
+      axios({
+        method: "POST",
+        headers: {
+          token: JSON.parse(localStorage.token).token
+        },
+        url: `http://localhost:3000/voting/${id}`
         })
-          .then(({ data }) => {
-            console.log('berhasil like')
-            console.log(data)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      },
-      sendDislike(id) {
-        axios({
-          method: 'DELETE',
-          headers: {
-            token: JSON.parse(localStorage.token).token
-          },
-          url: `http://localhost:3000/voting/${id}`
+        .then(({ data }) => {
+          console.log("berhasil like");
+          console.log(data);
         })
-          .then(({ data }) => {
-            console.log('berhasil dislike')
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      }
+        .catch(err => {
+          Swal.fire({
+            title: "You Have Liked This Person!",
+            text:"Can't Do it Twice",
+            type: "error",
+            confirmButtonText: "Okay"
+          });
+          console.log(err);
+        });
+    },
+    sendDislike(id) {
+      axios({
+        method: "DELETE",
+        headers: {
+          token: JSON.parse(localStorage.token).token
+        },
+        url: `http://localhost:3000/voting/${id}`
+      })
+        .then(({ data }) => {
+          console.log("berhasil dislike");
+        })
+        .catch(err => {
+          Swal.fire({
+            title: "You Still Not Liked This Person!",
+            text:"You Can't Do it",
+            type: "error",
+            confirmButtonText: "Okay"
+          });
+          console.log(err);
+        });
     }
   }
+};
 </script>
