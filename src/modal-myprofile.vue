@@ -16,6 +16,7 @@
                   >
                     <img :src="(userLoginData.image) ? userLoginData.image : 'https://vuetifyjs.com/apple-touch-icon-180x180.png'" 
                       alt='avatar'>
+                  <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
                   </v-avatar>
                 </v-layout>
               </v-flex>
@@ -39,14 +40,14 @@
                 <v-list-tile-content>
                   <v-list-tile-title><h3>Share on your social media!</h3></v-list-tile-title>
                 </v-list-tile-content>
-                <v-list-tile-action @click="">
+                <v-list-tile-action>
                   <v-btn flat icon color="pink">
                     <v-icon>star</v-icon>
                   </v-btn>
                 </v-list-tile-action>
                 <v-list-tile-action>
                   <v-btn flat icon color="pink">
-                    <v-icon>star</i></v-icon>
+                    <v-icon>star</v-icon>
                   </v-btn>
                 </v-list-tile-action>
                 <v-list-tile-action>

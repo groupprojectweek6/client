@@ -36,8 +36,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
-
+  import axios from 'axios'
   export default {
     props: ['dialog'],
     data() {
@@ -56,17 +55,21 @@
         this.$emit('close-modal', 'register')
       },
       sendRegister() {
-        axios({
-          method: 'POST',
-          url: 'http://localhost:3000/register'
-        })
-          .then(({ data }) => {
+        console.log('masukkk')
+        const fd = new FormData()
+        fd.append("full_name",this.full_name)
+        fd.append("email",this.email)
+        fd.append("password",this.password)
+        fd.append("image",this.selectedFile)
+        console.log(fd)
+        axios.post('http://localhost:3001/register',fd)
+        .then(({ data }) => {
             console.log(data)
+            this.$emit('close-modal', 'register')
           })
-          .catch((err) => {
+        .catch((err) => {
             console.log(err)
-          })
-        this.$emit('close-modal', 'register')
+        })
       }
     },
   }
