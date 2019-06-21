@@ -4,7 +4,7 @@
       <v-layout>
         <v-flex xs5>
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
+            :src="(dataUser.image) ? dataUser.image : 'https://cdn.vuetifyjs.com/images/cards/foster.jpg'"
             height="125px"
             contain
           ></v-img>
@@ -12,8 +12,8 @@
         <v-flex xs7>
           <v-card-title primary-title>
             <div>
-              <div class="headline">1. Budi</div>
-              <div>218 Likes</div>
+              <div class="headline">{{ index }}. {{ dataUser.full_name }}</div>
+              <div>{{ count }} Likes</div>
             </div>
           </v-card-title>
         </v-flex>
@@ -24,6 +24,6 @@
 
 <script>
 export default {
-  
+  props: ['count', 'dataUser', 'index']
 }
 </script>

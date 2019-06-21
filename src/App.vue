@@ -4,7 +4,7 @@
       <Navbar :isLoginParent='isLogin' v-on:set-logout="setLoginState" 
         v-on:setIsLoginParent="setLoginState"></Navbar>
       <v-layout row v-if="currentPage == 'content-home'">
-        <NewUser></NewUser>
+        <NewUser :isLogin="isLogin"></NewUser>
         <Topchart></Topchart>
       </v-layout>
     </v-content>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       isLogin: false,
+      loginUser: {},
       message: 'Hello world',
       currentPage: 'content-home'
     };
